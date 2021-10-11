@@ -15,16 +15,18 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   a = analogRead(A0);
-  if (a <= 500 && !running) {
+  if (a <= 500 && running == false) {
     digitalWrite(LEDpin, HIGH);
     for (int i = 1; i < 20; i++) {
       Serial.println("POslat SMS");
       running = true;
       break;
     }
+  } else if (a > 500 && running) {
+    delay(100);
+    running = false;
+    digitalWrite(LEDpin, LOW);
+
   }
-  
   Serial.println(a);
-
-
 }
