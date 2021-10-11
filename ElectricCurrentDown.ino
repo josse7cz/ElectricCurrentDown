@@ -33,8 +33,8 @@ void loop() {
     digitalWrite(LEDpin, HIGH);
     for (int i = 1; i < 20; i++) {
 
-      //Serial.println("Ahoj! Zřejmě došlo k výpadku proudu ve tvém objektu zájmu");
-      SendMessage("Ahoj, já jsem Artur. Zřejmě došlo k výpadku proudu ve tvém objektu zájmu");
+      Serial.println("Ahoj! Zřejmě došlo k výpadku proudu ve tvém objektu zájmu!");
+      //SendMessage("Ahoj, já jsem Artur. Zřejmě došlo k výpadku proudu ve tvém objektu zájmu!");
       running = true;
       break;
     }
@@ -42,8 +42,8 @@ void loop() {
     delay(1000);
     running = false;
     digitalWrite(LEDpin, LOW);
-    //Serial.println("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zase zpět!!");
-    SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
+    Serial.println("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
+    //SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
 
   }
  // Serial.println(a);
