@@ -46,7 +46,7 @@ void loop() {
     SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
 
   }
-  Serial.println(a);
+ // Serial.println(a);
 }
 void SendMessage(String Text)
 {
