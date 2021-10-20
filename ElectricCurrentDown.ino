@@ -2,12 +2,13 @@
 SoftwareSerial sim(10, 11);
 int _timeout;
 String _buffer;
-String number = "+420720119000"; //-> change with your number
+String number = "+420607936139"; //-> change with your number
 
 int a;
 bool running = false;
 int LEDpin = 3;
-
+bool smsOKSend=false;
+bool smsKOSend=false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -23,7 +24,7 @@ void setup() {
 void loop() {
    a = analogRead(A0);
 
-  if (sim.available() > 0) {
+  if (sim.available()) {
     Serial.write(sim.read());
   }
 
