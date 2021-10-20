@@ -5,15 +5,18 @@ String _buffer;
 String number = "+420607936139"; //-> change with your number
 
 int a;
-bool running = false;
-int LEDpin = 3;
-bool smsOKSend=false;
-bool smsKOSend=false;
+int b = 0;
+int pinLed = 3;
+int pinWaterLevel = 2;
+bool smsOKSend = false;
+bool smsKOSend = false;
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(pinWaterLevel, INPUT);    // sets the digital pin 2 as input
   Serial.begin(9600);
-  pinMode(LEDpin, OUTPUT);
+  pinMode(pinLed, OUTPUT);// sets the pin 3 as output
+
   //sim module set
   _buffer.reserve(50);
   Serial.println("System starting...");
@@ -22,32 +25,40 @@ void setup() {
 }
 
 void loop() {
-   a = analogRead(A0);
+  a = analogRead(A0);
+  b = digitalRead(pinWaterLevel);
 
   if (sim.available()) {
     Serial.write(sim.read());
   }
 
-
-  if (a <= 500 && running == false) {
-    delay(100);
-    digitalWrite(LEDpin, HIGH);
-    for (int i = 1; i < 20; i++) {
-
-      Serial.println("Ahoj! Zřejmě došlo k výpadku proudu ve tvém objektu zájmu!");
-      //SendMessage("Ahoj, já jsem Artur. Zřejmě došlo k výpadku proudu ve tvém objektu zájmu!");
-      running = true;
-      break;
+  //kdyz WS zjisti vodu nebo photorezistor registruje zhasnuti svetla a zaroven nebyla poslana SMS a NESVITI ledka TAK(posli sms a rozsvit ledku, nezapomen nastavit booleany)
+  if (b != 0 || a <= 500) {
+    //pokud nebyla poslana SMS
+    if (smsKOSend == false) {
+      delay(100);//proti chybam
+      digitalWrite(pinLed, HIGH);
+      Serial.println("Ahoj! Zřejmě došlo k zavadě na odčerpávacím systému ve tvém objektu!");
+      //zatim ne metodu send-- poplatky
+      //SendMessage("Ahoj! Zřejmě došlo k zavadě na odčerpávacím systému ve tvém objektu!");
+      smsKOSend = true;
+      smsOKSend = false;
     }
-  } else if (a > 500 && running) {
-    delay(1000);
-    running = false;
-    digitalWrite(LEDpin, LOW);
-    Serial.println("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
-    //SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
 
+    //kdyz se to opravi tj nahodi proud a WS je vyplej posli sms OK a zhasni ledku a nastav booleany
+  } else if (b == 0 && a > 500 ) {
+    delay(100);
+    digitalWrite(pinLed, LOW);
+    if (smsOKSend == false) {
+
+      Serial.println("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
+      //zatim ne metodu send-- poplatky
+      //SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
+      smsOKSend = true;
+      smsKOSend == false;
+      digitalWrite(pinLed, LOW);
+    }
   }
- // Serial.println(a);
 }
 void SendMessage(String Text)
 {
