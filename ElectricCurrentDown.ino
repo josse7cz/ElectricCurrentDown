@@ -51,9 +51,9 @@ void loop() {
     digitalWrite(pinLed, LOW);
     if (smsOKSend == false) {
 
-      Serial.println("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
+      Serial.println("Ahoj tady Artur! To sem zase já, ale vypadá to, že je vše v pořádku!!");
       //zatim ne metodu send-- poplatky
-      //SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že proud je zpět!!");
+      //SendMessage("Ahoj tady Artur! To sem zase já, ale vypadá to, že je vše v pořádku!!");
       smsOKSend = true;
       smsKOSend == false;
       digitalWrite(pinLed, LOW);
