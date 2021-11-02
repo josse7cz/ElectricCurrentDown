@@ -5,10 +5,9 @@ When the power fails (or the tank is about to overflow), the LED lights up and i
  
 Při výpadku elektrického proudu (nebo blížícího se přetečení nádrže) rozsvítí led diodu a pokud ještě nezaslal tak zašle SMS zprávu uživateli. Po opravě opět zašle SMS o nápravě.
  
-
 HAVE FUN.
- 
-![arduino schema](https://user-images.githubusercontent.com/24356264/138069185-9bb09aee-0d96-40cf-bd4a-8a828ddbc220.png)
+
+![arduino schema](https://user-images.githubusercontent.com/24356264/139896608-86de34e9-94a7-45cf-95fa-68dab45a20ea.png)
 
 ![Diagram](https://user-images.githubusercontent.com/24356264/138053079-f0d3fe29-c3d3-4680-b979-8e6ca88cc253.png)
 
